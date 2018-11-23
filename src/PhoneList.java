@@ -9,13 +9,12 @@ public class PhoneList {
 	 */
 	public void addPhone(Phone phone) {
 		allPhones.add(phone);
-		
-		// remove from bestPhones if dominated by the new phone
-		Iterator<Phone> iter = bestPhones.iterator();
-		while(iter.hasNext()) {
-			Phone other = iter.next();
+
+		Iterator<Phone> iterator = bestPhones.iterator();
+		while(iterator.hasNext()) {
+			Phone other = iterator.next();
 			if(phone.dominates(other)) {
-				iter.remove();
+				iterator.remove();
 			}
 		}
 		
@@ -29,7 +28,6 @@ public class PhoneList {
 	 * Determines whether a phone is dominated by any other phone.
 	 */
 	public boolean phoneIsDominated(Phone phone) {
-		// only need to compare with the undominated phones
 		for(Phone other : bestPhones) {
 			if(other.dominates(phone)) {
 				return true;
@@ -42,8 +40,7 @@ public class PhoneList {
 	 * Gets all phones. The list returned is unmodifiable.  
 	 */
 	public List<Phone> getAllPhones() {
-		// TODO: return an unmodifiable view of the list
-		return allPhones;
+		return Collections.unmodifiableList(allPhones);
 	}
 	
 	/*
@@ -51,7 +48,6 @@ public class PhoneList {
 	 * collection returned is unmodifiable.  
 	 */
 	public Collection<Phone> getBestPhones() {
-		// TODO: return an unmodifiable view of the set
-		return bestPhones;
+		return Collections.unmodifiableSet(bestPhones);
 	}
 }
